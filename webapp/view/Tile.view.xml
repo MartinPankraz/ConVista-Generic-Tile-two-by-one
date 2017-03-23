@@ -1,0 +1,21 @@
+<mvc:View controllerName="view.Tile" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:mvc="sap.ui.core.mvc" xmlns:mc="sap.suite.ui.microchart" displayBlock="true" xmlns="sap.m">
+	<GenericTile
+		header="My Header"
+		subheader="Summary"
+		press="onPress">
+		<tileContent>
+			<TileContent>
+				<content>
+					<mc:ComparisonMicroChart size="L" id="myChart">
+						<mc:data>
+							<mc:ComparisonMicroChartData title="Spend Alerts" value="1" color="Error"/>
+							<mc:ComparisonMicroChartData title="SSIs Pending for Month" value="4" color="Good"/>
+							<mc:ComparisonMicroChartData title="Events in next 7 days" value="2" color="Critical"/>
+						</mc:data>
+					</mc:ComparisonMicroChart>
+				</content>
+			</TileContent>
+		</tileContent>
+	</GenericTile>
+</mvc:View>

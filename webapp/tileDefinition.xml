@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chip xmlns="http://schemas.sap.com/sapui2/services/Chip/1">
+	<implementation>
+		<sapui5>
+			<basePath>./</basePath>
+			<viewName>view/Tile.view.xml</viewName>
+		</sapui5>
+	</implementation>
+	<appearance>
+		<title>My Tile</title>
+		<description>Custom Tile</description>
+	</appearance>
+	<contracts>
+		<consume id="fullscreen"/>
+		<consume id="configuration">
+            <parameters>
+                <parameter name="tileConfiguration"></parameter>
+                <parameter name="col">2</parameter>
+            </parameters>
+        </consume>
+        <consume id="preview" />
+        <consume id="writeConfiguration" />
+        <consume id="configurationUi" />
+        <consume id="search" />
+        <consume id="refresh" />
+        <consume id="visible" />
+        <consume id="bag" />
+        <consume id="url" />
+        <consume id="actions" />
+	</contracts>
+</chip>

@@ -1,0 +1,35 @@
+<core:FragmentDefinition xmlns="sap.suite.ui.microchart" xmlns:core="sap.ui.core">
+<DeltaMicroChart value1="-105"
+						value2="-98" title1="May 2014" title2="Apr 2014" displayValue1="-105 Mio"
+						displayValue2="-98 Mio" deltaDisplayValue="7 Mio" color="Error" />
+<!--	<ColumnMicroChart>
+		<leftTopLabel>
+			<ColumnMicroChartLabel label="June 1" />
+		</leftTopLabel>
+		<rightTopLabel>
+			<ColumnMicroChartLabel label="June 30" />
+		</rightTopLabel>
+		<leftBottomLabel>
+			<ColumnMicroChartLabel label="0M" />
+		</leftBottomLabel>
+		<rightBottomLabel>
+			<ColumnMicroChartLabel label="80M" />
+		</rightBottomLabel>
+		<columns>
+			<ColumnMicroChartData value="65" color="Error" />
+			<ColumnMicroChartData value="90" color="Error" />
+			<ColumnMicroChartData value="75" color="Error" />
+			<ColumnMicroChartData value="95" color="Error" />
+			<ColumnMicroChartData value="100" color="Error" />
+			<ColumnMicroChartData value="90" color="Error" />
+			<ColumnMicroChartData value="80" color="Error" />
+			<ColumnMicroChartData value="35" color="Neutral" />
+			<ColumnMicroChartData value="65" color="Neutral" />
+			<ColumnMicroChartData value="55" color="Neutral" />
+			<ColumnMicroChartData value="60" color="Neutral" />
+			<ColumnMicroChartData value="5" color="Neutral" />
+			<ColumnMicroChartData value="15" color="Neutral" />
+			<ColumnMicroChartData value="15" color="Neutral" />
+		</columns>
+	</ColumnMicroChart>-->
+</core:FragmentDefinition>

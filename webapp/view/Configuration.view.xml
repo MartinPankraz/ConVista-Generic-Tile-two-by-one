@@ -1,0 +1,64 @@
+<core:View xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout" xmlns:table="sap.ui.table"
+	xmlns:clayout="sap.ui.commons.layout" xmlns:common="sap.ui.commons" controllerName="view.Configuration">
+	<MessageStrip id="messageStrip" showIcon="true" showCloseButton="false" visible="false"/>
+	<form:SimpleForm id="configuration" maxContainerCols="8" minWidth="1024" editable="true">
+		<form:content>
+			<core:Title id="categoryCommon" text="{i18n>configuration.category.general}"/>
+			<Label text="{i18n>configuration.display_title_text}"/>
+			<Input id="titleInput" value="{/config/display_title_text}" width="100%" tooltip="{i18n>configuration.display_title_text.tooltip}"
+				enabled="{/config/editable}" editable="{/config/isLocaleSuitable}"/>
+			<Label text="{i18n>configuration.display_subtitle_text}"/>
+			<Input id="subtitleInput" value="{/config/display_subtitle_text}" enabled="{/config/editable}"
+				tooltip="{i18n>configuration.display_subtitle_text.tooltip}" editable="{/config/isLocaleSuitable}"/>
+			<Label text="{i18n>footerText}"/>
+			<Input id="footerInput" value="{/config/display_footer}" enabled="{/config/editable}" editable="{/config/isLocaleSuitable}"/>
+			<Label text="Type (xml)"/>
+			<TextArea value="{/config/display_tile_content_xml}" rows="10"/>
+			<Label text="{i18n>configuration.keywords}"/>
+			<Input id="keywordsInput" value="{/config/display_search_keywords}" enabled="{/config/editable}" width="100%"
+				tooltip="{i18n>configuration.keywords.tooltip}" editable="{/config/isLocaleSuitable}"/>
+			<Label text="{i18n>configuration.display_icon_url}"/>
+			<Input id="iconInput" value="{/config/display_icon_url}" enabled="{/config/editable}" placeholder="sap-icon://inbox"
+				tooltip="{i18n>configuration.display_icon_url.tooltip}" liveChange="onConfigurationInputChange" valueHelpRequest="onIconValueHelpRequest"
+				showValueHelp="true"/>
+			<core:Title id="categoryDynamicData" text="{i18n>configuration.category.dynamic_data}"/>
+			<Label text="{i18n>configuration.service_url}"/>
+			<Input id="serviceUrlInput" value="{/config/service_url}" width="100%" enabled="{/config/editable}"
+				tooltip="{i18n>configuration.service_url.tooltip}"/>
+			<Label text="{i18n>configuration.service_refresh_interval}"/>
+			<Input id="refreshInput" value="{/config/service_refresh_interval}" type="Number" enabled="{/config/editable}" width="6em"
+				placeholder="{i18n>configuration.seconds}" tooltip="{i18n>configuration.seconds.tooltip}"/>
+			<core:Title id="categoryNavigation" text="{i18n>configuration.category.navigation}"/>
+			<Label text="{i18n>configuration.navigation_use_semantic_object}"/>
+			<CheckBox id="useLpdCheckbox" selected="{/config/navigation_use_semantic_object}" select="onCheckBoxChange"
+				tooltip="{i18n>configuration.navigation_use_semantic_object.tooltip}" enabled="{/config/editable}"/>
+			<Label text="{i18n>configuration.semantic_object}"/>
+			<Input id="navigation_semantic_objectInput" width="100%" tooltip="{i18n>configuration.semantic_object.tooltip}" maxLength="30"
+				liveChange="onConfigurationInputChange" valueHelpRequest="onValueHelpRequest" showValueHelp="true" showSuggestion="true"
+				enabled="{= ${/enabled} &amp;&amp; ${/config/editable}}" value="{/value}"/>
+			<Label text="{i18n>configuration.navigation_semantic_action}"/>
+			<Input id="navigation_semantic_actionInput" value="{/config/navigation_semantic_action}" width="100%" maxLength="50"
+				enabled="{= ${/config/navigation_use_semantic_object} &amp;&amp; ${/config/editable}}"
+				tooltip="{i18n>configuration.navigation_semantic_action.tooltip}" liveChange="onConfigurationInputChange"
+				valueHelpRequest="onActionValueHelpRequest" showValueHelp="true" showSuggestion="true"/>
+			<Label text="{i18n>configuration.navigation_semantic_parameters}"/>
+			<Input id="navigation_semantic_parametersInput" value="{/config/navigation_semantic_parameters}" width="100%"
+				enabled="{= ${/config/navigation_use_semantic_object} &amp;&amp; ${/config/editable}}"
+				tooltip="{i18n>configuration.navigation_semantic_parameters.tooltip}"/>
+			<Label text="{i18n>configuration.navigation_target_url}"/>
+			<Input id="targetUrl" value="{/config/navigation_target_url}" type="Url" width="100%"
+				tooltip="{i18n>configuration.navigation_target_url.tooltip}"/>
+		</form:content>
+	</form:SimpleForm>
+	<HBox visible="false">
+		<Dialog id="selectIconDialog" leftButton="ok" rightButton="cancel" title="{i18n>configuration.select_icon}">
+			<content>
+				<layout:ResponsiveFlowLayout id="icons"/>
+				<HBox visible="true">
+					<Button id="ok" enabled="{/config/ok.enabled}" text="{i18n>configuration.ok}"/>
+					<Button id="cancel" text="{i18n>configuration.cancel}" press="onSelectIconClose"/>
+				</HBox>
+			</content>
+		</Dialog>
+	</HBox>
+</core:View>
