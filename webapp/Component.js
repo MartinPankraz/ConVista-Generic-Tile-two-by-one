@@ -1,11 +1,11 @@
 sap.ui.define([
 	"sap/ui/core/UIComponent",
 	"sap/ui/Device",
-	"convista/com/demo/dynamictile/model/models"
+	"convista/com/demo/dynamictile/twobyone/model/models"
 ], function(UIComponent, Device, models) {
 	"use strict";
 
-	return UIComponent.extend("convista.com.demo.dynamictile.Component", {
+	return UIComponent.extend("convista.com.demo.dynamictile.twobyone.Component", {
 
 		metadata: {
 			manifest: "json"

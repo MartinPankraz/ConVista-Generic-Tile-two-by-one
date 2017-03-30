@@ -6,8 +6,8 @@
   "build": {
     "targetFolder": "dist",
     "sourceFolder": "webapp",
-    "buildRequired": true,
-    "lastBuildDateTime": "Mon, 06 Mar 2017 16:44:56 GMT"
+    "buildRequired": false,
+    "lastBuildDateTime": "Thu, 30 Mar 2017 17:29:35 GMT"
   },
   "generation": [
     {
@@ -37,6 +37,6 @@
   },
   "deploy": {
     "destination": "CBW",
-    "name": "ZCC_TILE"
+    "name": "ZCC_TILE_2X1"
   }
 }

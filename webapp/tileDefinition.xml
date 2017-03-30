@@ -7,8 +7,8 @@
 		</sapui5>
 	</implementation>
 	<appearance>
-		<title>My Tile</title>
-		<description>Custom Tile</description>
+		<title>My Tile 2x1</title>
+		<description>Custom Tile 2x1</description>
 	</appearance>
 	<contracts>
 		<consume id="fullscreen"/>
