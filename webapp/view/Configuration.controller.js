@@ -48,10 +48,27 @@ sap.ui.define([
         },
 
         onAfterRendering: function(){
-//            sap.ushell.components.tiles.utils.updateTooltipForDisabledProperties(this.getView());
+			//sap.ushell.components.tiles.utils.updateTooltipForDisabledProperties(this.getView());
             sap.ushell.components.tiles.utils.updateMessageStripForOriginalLanguage(this.getView());
-            // Set default tile style to oneByOne
-            this.getView().getModel().setProperty("/config/frame_type", "OneByOne");
+            var frameType = this.getView().getModel().getProperty("/config/frame_type");
+            // Set default tile style to TwoByOne1 if frameType is not defined
+            if(!frameType){
+            	this.getView().getModel().setProperty("/config/frame_type", "twoByOne1");
+            }
+            // Make sure the inputs are enabled or disabled depending on the selected key
+            var key = this.getView().byId("frameType").getSelectedKey();
+			var textArea = this.getView().byId("secondTileContentArea");
+        	var footer = this.getView().byId("secondFooterInput");
+			switch(key){
+        		case "twoByOne1":
+        			textArea.setEnabled(false);
+        			footer.setEnabled(false);
+        			break;
+        		case "twoByOne2":	
+        			textArea.setEnabled(true);
+        			footer.setEnabled(true);
+        			break;
+        	}
         },
 
         // forward semantic object value helper request to utils
@@ -85,11 +102,6 @@ sap.ui.define([
         	
         	// Decide what to do depending on choice
         	switch(key){
-        		case "oneByOne":
-        			textArea.setEnabled(false);
-        			footer.setEnabled(false);
-        			oModel.setProperty("/config/frame_type", "oneByOne");
-        			break;
         		case "twoByOne1":
         			textArea.setEnabled(false);
         			footer.setEnabled(false);

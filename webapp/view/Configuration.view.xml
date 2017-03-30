@@ -22,9 +22,8 @@
 			<Select
             	id="frameType"
             	change="onFrameTypeBoxCheck"
-				selectedKey="oneByOne">
+            	selectedKey="{/config/frame_type}">
 	            	<items>
-						<core:Item key="oneByOne" text="1x1" />
 						<core:Item key="twoByOne1" text="2x1 with one chart" />
 						<core:Item key="twoByOne2" text="2x1 with two charts" />
 	            	</items>

@@ -116,6 +116,8 @@ sap.ui.define([
 			//***************************************************************************//
 			//***************************************************************************//
 			this.tileContainer = this.getView().getContent()[0];
+			// set tile frame type to twobyone type
+			this.tileContainer.setFrameType("TwoByOne");
 			
 			var oTileContainerModel = new sap.ui.model.json.JSONModel();
 			
@@ -124,33 +126,10 @@ sap.ui.define([
 			
 			// SELECT WHAT TO DO DEPENDING ON THE FRAME TYPE
 			switch(oConfig.frame_type){
-				
-				// FIRST CASE -- One by one tile
-        		case "oneByOne":
-        			// No input on XML AREA
-        			if(!oConfig.display_tile_content_xml || oConfig.display_tile_content_xml === ""){
-						this.tileContent = sap.ui.xmlfragment("view.MicroChartDemo",this);
-					}
-					// Input on XML AREA
-					else{
-						try{
-							this.tileContent = sap.ui.xmlfragment({
-								fragmentContent:oConfig.display_tile_content_xml
-							}, this);
-							this.tileContainer.getTileContent()[0].setContent(this.tileContent);
-						}catch(e){
-							jQuery.sap.log.error(e);
-							jQuery.sap.log.error("Parsing error for given XML Fragment. Did you add the names spaces and fragment xml wrapper?");
-						}
-					}
-					// Set the content
-					this.tileContainer.getTileContent()[0].setContent(this.tileContent);
-        			break;
-        			
-        		// SECOND CASE -- Two by one tile with one chart
+
+        		// FIRST CASE -- Two by one tile with one chart
         		case "twoByOne1":
-        			// set tile frame type to twobyone type
-					this.tileContainer.setFrameType("TwoByOne");
+        			
 					// set tile content frame type to twobyone type
 					this.tileContainer.getTileContent()[0].setFrameType("TwoByOne");
 					
@@ -175,10 +154,8 @@ sap.ui.define([
 					this.tileContainer.getTileContent()[0].setContent(this.tileContent);
         			break;
         			
-        		// THIRD CASE -- Two by one tile with two charts	
+        		// SECOND CASE -- Two by one tile with two charts	
         		case "twoByOne2":
-        			// set tile frame type to twobyone type
-					this.tileContainer.setFrameType("TwoByOne");
 					// No input on both xml text areas
         			if((!oConfig.display_tile_content_xml || oConfig.display_tile_content_xml === "")&&(!oConfig.display_second_tile_content_xml || oConfig.display_second_tile_content_xml !== "")){
 						// content of first part of tile
