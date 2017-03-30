@@ -10,10 +10,34 @@
 			<Label text="{i18n>configuration.display_subtitle_text}"/>
 			<Input id="subtitleInput" value="{/config/display_subtitle_text}" enabled="{/config/editable}"
 				tooltip="{i18n>configuration.display_subtitle_text.tooltip}" editable="{/config/isLocaleSuitable}"/>
-			<Label text="{i18n>footerText}"/>
-			<Input id="footerInput" value="{/config/display_footer}" enabled="{/config/editable}" editable="{/config/isLocaleSuitable}"/>
+			
+			<!--First text area for OneByOne tiles or TwoByOne tiles with one chart-->
 			<Label text="Type (xml)"/>
 			<TextArea value="{/config/display_tile_content_xml}" rows="10"/>
+			<Label text="{i18n>footerText}"/>
+			<Input id="footerInput" value="{/config/display_footer}" enabled="{/config/editable}" editable="{/config/isLocaleSuitable}"/>
+			
+			<!-- SelectBox to select FrameType (TwoByOne or OneByOne) -->
+			<Label text="Select a FrameType"/>
+			<Select
+            	id="frameType"
+            	change="onFrameTypeBoxCheck"
+				selectedKey="oneByOne">
+	            	<items>
+						<core:Item key="oneByOne" text="1x1" />
+						<core:Item key="twoByOne1" text="2x1 with one chart" />
+						<core:Item key="twoByOne2" text="2x1 with two charts" />
+	            	</items>
+			</Select>
+			
+			<!-- Second text area for TwoByOne tiles with 2 charts -->
+			<Label text="Second Chart (xml)"/>
+			<TextArea id="secondTileContentArea" value="{/config/display_second_tile_content_xml}" rows="10" enabled="false"/>
+			
+			<!-- Second footer for TwoByOne tiles with 2 charts -->
+			<Label text="{i18n>footerText}"/>
+			<Input id="secondFooterInput" value="{/config/display_second_footer}" enabled="false" />
+			
 			<Label text="{i18n>configuration.keywords}"/>
 			<Input id="keywordsInput" value="{/config/display_search_keywords}" enabled="{/config/editable}" width="100%"
 				tooltip="{i18n>configuration.keywords.tooltip}" editable="{/config/isLocaleSuitable}"/>

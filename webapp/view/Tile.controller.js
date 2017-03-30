@@ -116,31 +116,107 @@ sap.ui.define([
 			//***************************************************************************//
 			//***************************************************************************//
 			this.tileContainer = this.getView().getContent()[0];
+			
 			var oTileContainerModel = new sap.ui.model.json.JSONModel();
+			
 			this.tileContent = null;
-			//load initial default content
-			if(!oConfig.display_tile_content_xml || oConfig.display_tile_content_xml === ""){
-				this.tileContent = sap.ui.xmlfragment("view.MicroChartDemo",this);//convista.com.demo.dynamictile.view.MicroChartDemo	
-			}else{
-				//assign xml fragment as given in configuration screen
-				try{
-					this.tileContent = sap.ui.xmlfragment({
-						fragmentContent:oConfig.display_tile_content_xml
-					}, this);
-				}catch(e){
-					jQuery.sap.log.error(e);
-					jQuery.sap.log.error("Parsing error for given XML Fragment. Did you add the names spaces and fragment xml wrapper?");
-				}
-			}
+			this.tileSecondContent = null;
+			
+			// SELECT WHAT TO DO DEPENDING ON THE FRAME TYPE
+			switch(oConfig.frame_type){
+				
+				// FIRST CASE -- One by one tile
+        		case "oneByOne":
+        			// No input on XML AREA
+        			if(!oConfig.display_tile_content_xml || oConfig.display_tile_content_xml === ""){
+						this.tileContent = sap.ui.xmlfragment("view.MicroChartDemo",this);
+					}
+					// Input on XML AREA
+					else{
+						try{
+							this.tileContent = sap.ui.xmlfragment({
+								fragmentContent:oConfig.display_tile_content_xml
+							}, this);
+							this.tileContainer.getTileContent()[0].setContent(this.tileContent);
+						}catch(e){
+							jQuery.sap.log.error(e);
+							jQuery.sap.log.error("Parsing error for given XML Fragment. Did you add the names spaces and fragment xml wrapper?");
+						}
+					}
+					// Set the content
+					this.tileContainer.getTileContent()[0].setContent(this.tileContent);
+        			break;
+        			
+        		// SECOND CASE -- Two by one tile with one chart
+        		case "twoByOne1":
+        			// set tile frame type to twobyone type
+					this.tileContainer.setFrameType("TwoByOne");
+					// set tile content frame type to twobyone type
+					this.tileContainer.getTileContent()[0].setFrameType("TwoByOne");
+					
+        			// No input on XML AREA
+        			if(!oConfig.display_tile_content_xml || oConfig.display_tile_content_xml === ""){
+						// content of the tile
+						this.tileContent = sap.ui.xmlfragment("view.MicroChartDemo",this);
+					}
+					// Input on XML AREA
+					else{
+						try{
+							// content of two by one tile
+							this.tileContent = sap.ui.xmlfragment({
+								fragmentContent:oConfig.display_tile_content_xml
+							}, this);
+						}catch(e){
+							jQuery.sap.log.error(e);
+							jQuery.sap.log.error("Parsing error for given XML Fragment. Did you add the names spaces and fragment xml wrapper?");
+						}
+					}
+					// set content
+					this.tileContainer.getTileContent()[0].setContent(this.tileContent);
+        			break;
+        			
+        		// THIRD CASE -- Two by one tile with two charts	
+        		case "twoByOne2":
+        			// set tile frame type to twobyone type
+					this.tileContainer.setFrameType("TwoByOne");
+					// No input on both xml text areas
+        			if((!oConfig.display_tile_content_xml || oConfig.display_tile_content_xml === "")&&(!oConfig.display_second_tile_content_xml || oConfig.display_second_tile_content_xml !== "")){
+						// content of first part of tile
+						this.tileContent = sap.ui.xmlfragment("view.MicroChartDemo",this);
+						this.tileSecondContent = sap.ui.xmlfragment("view.MicroChartDemo",this);
+					}
+					// Input on both xml text areas
+					else{
+						try{
+							// content of first chart
+							this.tileContent = sap.ui.xmlfragment({
+								fragmentContent:oConfig.display_tile_content_xml
+							}, this);
+							// content of second chart
+							this.tileSecondContent = sap.ui.xmlfragment({
+								fragmentContent:oConfig.display_second_tile_content_xml
+							}, this);
+						}catch(e){
+							jQuery.sap.log.error(e);
+							jQuery.sap.log.error("Parsing error for given XML Fragment. Did you add the names spaces and fragment xml wrapper?");
+						}
+						
+					}
+					// set content of first chart
+					this.tileContainer.getTileContent()[0].setContent(this.tileContent);
+					// set content of second chart
+					this.tileContainer.addTileContent(new sap.m.TileContent({content:this.tileSecondContent}));
+					// set footer of second chart
+					this.tileContainer.getTileContent()[1].setFooter(oConfig.display_second_footer);
+        			break;
+        	}
+			
 			this.tileContainer.setModel(oTileContainerModel);
 			
+			// Header, subheader and footer for both kind of tiles
 			this.tileContainer.setHeader(oConfig.display_title_text);
 			this.tileContainer.setSubheader(oConfig.display_subtitle_text);
-			//finally add content to generic tile
-			var currentContent = this.tileContainer.getTileContent()[0];
-			currentContent.setContent(this.tileContent);
-			currentContent.setFooter(oConfig.display_footer);
-			//currentContent.addStyleClass("ccChartSize");
+			this.tileContainer.getTileContent()[0].setFooter(oConfig.display_footer);
 		},
 		
 		onPress: function(oEvent){
@@ -187,6 +263,13 @@ sap.ui.define([
                     display_icon_url : oModel.getProperty("/config/display_icon_url"),
                     // display_number_unit : oModel.getProperty("/config/display_number_unit"),
                     display_tile_content_xml : oModel.getProperty("/config/display_tile_content_xml"),
+                    // property for knowing which frame type (1x1 or 2x1) was selected
+                    frame_type : oModel.getProperty("/config/frame_type"),
+                    
+                    // properties for a TwoByOne tile
+                    display_second_tile_content_xml : oModel.getProperty("/config/display_second_tile_content_xml"),
+                    display_second_footer: oModel.getProperty("/config/display_second_footer"),
+                    
                     display_footer : oModel.getProperty("/config/display_footer"),
                     service_url: oModel.getProperty("/config/service_url"),
                     service_refresh_interval: oModel.getProperty("/config/service_refresh_interval"),

@@ -50,6 +50,8 @@ sap.ui.define([
         onAfterRendering: function(){
 //            sap.ushell.components.tiles.utils.updateTooltipForDisabledProperties(this.getView());
             sap.ushell.components.tiles.utils.updateMessageStripForOriginalLanguage(this.getView());
+            // Set default tile style to oneByOne
+            this.getView().getModel().setProperty("/config/frame_type", "OneByOne");
         },
 
         // forward semantic object value helper request to utils
@@ -71,6 +73,36 @@ sap.ui.define([
             oModel.setProperty("/enabled", value);
             sap.ushell.components.tiles.utils.checkInput(this.getView(), oEvent);
         },
+        // change enabled status if 2x1 box checked
+        onFrameTypeBoxCheck: function(oEvent){
+        	// Get selected key of select box
+        	var key = this.getView().byId("frameType").getSelectedKey();
+        	// Grab footer and textArea inputs
+        	var textArea = this.getView().byId("secondTileContentArea");
+        	var footer = this.getView().byId("secondFooterInput");
+        	// Get hold of config model
+        	var oModel = this.getView().getModel();
+        	
+        	// Decide what to do depending on choice
+        	switch(key){
+        		case "oneByOne":
+        			textArea.setEnabled(false);
+        			footer.setEnabled(false);
+        			oModel.setProperty("/config/frame_type", "oneByOne");
+        			break;
+        		case "twoByOne1":
+        			textArea.setEnabled(false);
+        			footer.setEnabled(false);
+        			oModel.setProperty("/config/frame_type", "twoByOne1");
+        			break;
+        		case "twoByOne2":	
+        			textArea.setEnabled(true);
+        			footer.setEnabled(true);
+        			oModel.setProperty("/config/frame_type", "twoByOne2");
+        			break;
+        	}
+        },
+        
         // forward icon value help request to utils
         onIconValueHelpRequest : function (oEvent) {
             //Third parameter is to differentiate whether it's Tile Actions icon field or general icon field. If it's true, then it's tile actions icon field, else general icon field.
