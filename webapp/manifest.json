@@ -61,11 +61,7 @@
 			"i18n": {
 				"type": "sap.ui.model.resource.ResourceModel",
 				"settings": {
-<<<<<<< Upstream, based on 8827185c005d55e2e4191b57639397c410f1e732
 					"bundleName": "convista.com.demo.dynamictile.twobyone.i18n.i18n"
-=======
-					"bundleName": "convista.com.demo.dynamictwobyonetile.i18n.i18n"
->>>>>>> 902d33e Filenames changes
 				}
 			}
 		},
