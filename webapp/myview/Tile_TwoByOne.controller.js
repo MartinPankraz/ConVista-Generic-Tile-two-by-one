@@ -449,6 +449,20 @@ sap.ui.define([
 							var currentContent = that.tileContainer.getTileContent()[0];
 							currentContent.setFooter(footerText);
 						}
+						jsonFromString = that.getJSONFromString(oConfig.display_second_footer);
+						var secondfooterText = "";
+						if(jsonFromString.path){
+							secondfooterText = model.getProperty(jsonFromString.path);
+							if(jsonFromString.formatter === ".formatDateTime"){
+								secondfooterText = that.formatDateTime(secondfooterText);	
+							}
+						}else{
+							secondfooterText = model.getProperty(oConfig.display_second_footer);
+						}
+						if(secondfooterText){
+							var currentContent = that.tileContainer.getTileContent()[1];
+							currentContent.setFooter(secondfooterText);
+						}
     				}
 				});
             }
