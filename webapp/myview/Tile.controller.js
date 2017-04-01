@@ -6,8 +6,8 @@ sap.ui.define([
 	jQuery.sap.require("sap.ui.core.format.DateFormat");
 	jQuery.sap.require("sap.ui.core.format.NumberFormat");
 	
-	return Controller.extend("myview.Tile_TwoByOne", {
-	//return Controller.extend("convista.com.demo.dynamictwobyonetile.myview.Tile_TwoByOne", {
+	return Controller.extend("myview.Tile", {
+	//return Controller.extend("convista.com.demo.dynamictwobyonetile.myview.Tile", {
 		
 		onInit: function(){
 			var oView = this.getView(),
