@@ -3,7 +3,7 @@ sap.ui.define([
 ], function(Controller) {
 	"use strict";
 
-	return Controller.extend("view.Configuration", {
+	return Controller.extend("myview.Configuration", {
 		// checks given inputs
         onConfigurationInputChange: function (oControlEvent) {
             sap.ushell.components.tiles.utils.checkInput(this.getView(), oControlEvent);
@@ -19,7 +19,7 @@ sap.ui.define([
             oView.setModel(oResourceModel, "i18n");
             var oBundle = oResourceModel.getResourceBundle();
             // set view name for identification in utils
-            oView.setViewName("view.Configuration");
+            oView.setViewName("myview.Configuration");
             sap.ushell.components.tiles.utils.createSemanticObjectModel(this, oSemanticObjectSelector, this.aDefaultObjects);
             sap.ushell.components.tiles.utils.createActionModel(this, oActionSelector, this.aDefaultObjects);
 

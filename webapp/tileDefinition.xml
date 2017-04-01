@@ -3,7 +3,7 @@
 	<implementation>
 		<sapui5>
 			<basePath>./</basePath>
-			<viewName>view/Tile_TwoByOne.view.xml</viewName>
+			<viewName>myview/Tile_TwoByOne.view.xml</viewName>
 		</sapui5>
 	</implementation>
 	<appearance>

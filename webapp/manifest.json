@@ -39,7 +39,7 @@
 	"sap.ui5": {
 		"_version": "1.1.0",
 		"rootView": {
-			"viewName": "convista.com.demo.dynamictwobyonetile.view.Tile_TwoByOne",
+			"viewName": "convista.com.demo.dynamictwobyonetile.myview.Tile_TwoByOne",
 			"type": "XML"
 		},
 		"dependencies": {
@@ -61,7 +61,7 @@
 			"i18n": {
 				"type": "sap.ui.model.resource.ResourceModel",
 				"settings": {
-					"bundleName": "convista.com.demo.dynamictile.twobyone.i18n.i18n"
+					"bundleName": "convista.com.demo.dynamictwobyonetile.myview.i18n.i18n"
 				}
 			}
 		},

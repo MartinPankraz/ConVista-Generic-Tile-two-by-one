@@ -6,8 +6,8 @@ sap.ui.define([
 	jQuery.sap.require("sap.ui.core.format.DateFormat");
 	jQuery.sap.require("sap.ui.core.format.NumberFormat");
 	
-	return Controller.extend("view.Tile_TwoByOne", {
-	//return Controller.extend("convista.com.demo.dynamictwobyonetile.view.Tile_TwoByOne", {
+	return Controller.extend("myview.Tile_TwoByOne", {
+	//return Controller.extend("convista.com.demo.dynamictwobyonetile.myview.Tile_TwoByOne", {
 		
 		onInit: function(){
 			var oView = this.getView(),
@@ -38,7 +38,7 @@ sap.ui.define([
             if (oTileApi.configurationUi.isEnabled()) {
                 oTileApi.configurationUi.setUiProvider(function () {
                     // attach configuration UI provider, which is essentially a components.tiles.dynamicapplauncher.Configuration
-                    var oConfigurationUi = sap.ushell.components.tiles.utils.getConfigurationUi(oView, "view.Configuration");
+                    var oConfigurationUi = sap.ushell.components.tiles.utils.getConfigurationUi(oView, "myview.Configuration");
                     oTileApi.configurationUi.attachCancel(that.onCancelConfiguration.bind(null, oConfigurationUi));
                     oTileApi.configurationUi.attachSave(that.onSaveConfiguration.bind(null, oConfigurationUi));
                     return oConfigurationUi;
@@ -136,7 +136,7 @@ sap.ui.define([
         			// No input on XML AREA
         			if(!oConfig.display_tile_content_xml || oConfig.display_tile_content_xml === ""){
 						// content of the tile
-						this.tileContent = sap.ui.xmlfragment("view.MicroChartDemo",this);
+						this.tileContent = sap.ui.xmlfragment("myview.MicroChartDemo",this);
 					}
 					// Input on XML AREA
 					else{
@@ -159,8 +159,8 @@ sap.ui.define([
 					// No input on both xml text areas
         			if((!oConfig.display_tile_content_xml || oConfig.display_tile_content_xml === "")&&(!oConfig.display_second_tile_content_xml || oConfig.display_second_tile_content_xml !== "")){
 						// content of first part of tile
-						this.tileContent = sap.ui.xmlfragment("view.MicroChartDemo",this);
-						this.tileSecondContent = sap.ui.xmlfragment("view.MicroChartDemo",this);
+						this.tileContent = sap.ui.xmlfragment("myview.MicroChartDemo",this);
+						this.tileSecondContent = sap.ui.xmlfragment("myview.MicroChartDemo",this);
 					}
 					// Input on both xml text areas
 					else{
