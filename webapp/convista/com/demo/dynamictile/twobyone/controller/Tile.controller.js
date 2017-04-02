@@ -10,6 +10,9 @@ sap.ui.define([
 	return Controller.extend("convista.com.demo.dynamictile.twobyone.controller.Tile", {
 		
 		onInit: function(){
+			var sRootPath = jQuery.sap.getModulePath("convista.com.demo.dynamictile.twobyone");
+			jQuery.sap.includeStyleSheet(sRootPath+"/css/style.css");
+			
 			var oView = this.getView(),
                 oViewData = oView.getViewData(),
                 oTileApi = oViewData.chip,
