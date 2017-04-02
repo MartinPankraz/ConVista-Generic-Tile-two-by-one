@@ -190,6 +190,10 @@ sap.ui.define([
 					this.tileContainer.getTileContent()[1].setFooter(oConfig.display_second_footer);
         			break;
         	}
+        	
+        	if(oConfig.display_icon_url){
+				this.tileContainer.setHeaderImage(oConfig.display_icon_url);	
+			}
 			
 			this.tileContainer.setModel(oTileContainerModel);
 			
