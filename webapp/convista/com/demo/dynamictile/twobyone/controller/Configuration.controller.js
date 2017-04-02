@@ -100,6 +100,7 @@ sap.ui.define([
         	// Grab footer and textArea inputs
         	var textArea = this.getView().byId("secondTileContentArea");
         	var footer = this.getView().byId("secondFooterInput");
+        	var secondServiceURLInput = this.getView().byId("serviceUrlInput2");
         	// Get hold of config model
         	var oModel = this.getView().getModel();
         	
@@ -108,11 +109,14 @@ sap.ui.define([
         		case "twoByOne1":
         			textArea.setEnabled(false);
         			footer.setEnabled(false);
+        			//secondServiceURLInput.setEnabled(false);
+        			secondServiceURLInput.setValue("");
         			oModel.setProperty("/config/frame_type", "twoByOne1");
         			break;
         		case "twoByOne2":	
         			textArea.setEnabled(true);
         			footer.setEnabled(true);
+        			//secondServiceURLInput.setEnabled(true);
         			oModel.setProperty("/config/frame_type", "twoByOne2");
         			break;
         	}

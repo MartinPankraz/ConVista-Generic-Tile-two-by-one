@@ -44,9 +44,13 @@
 			<Input id="iconInput" value="{/config/display_icon_url}" enabled="{/config/editable}" placeholder="sap-icon://inbox"
 				tooltip="{i18n>configuration.display_icon_url.tooltip}" liveChange="onConfigurationInputChange" valueHelpRequest="onIconValueHelpRequest"
 				showValueHelp="true"/>
+			
 			<core:Title id="categoryDynamicData" text="{i18n>configuration.category.dynamic_data}"/>
 			<Label text="{i18n>configuration.service_url}"/>
 			<Input id="serviceUrlInput" value="{/config/service_url}" width="100%" enabled="{/config/editable}"
+				tooltip="{i18n>configuration.service_url.tooltip}"/>
+			<Label text="{i18n>configuration.service_url} 2"/>
+			<Input id="serviceUrlInput2" value="{/config/service_url_2}" width="100%" enabled="{/config/editable}"
 				tooltip="{i18n>configuration.service_url.tooltip}"/>
 			<Label text="{i18n>configuration.service_refresh_interval}"/>
 			<Input id="refreshInput" value="{/config/service_refresh_interval}" type="Number" enabled="{/config/editable}" width="6em"
