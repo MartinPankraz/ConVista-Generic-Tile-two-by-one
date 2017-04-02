@@ -1,5 +1,5 @@
 <core:View xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout" xmlns:table="sap.ui.table"
-	xmlns:clayout="sap.ui.commons.layout" xmlns:common="sap.ui.commons" controllerName="myview.Configuration">
+	xmlns:clayout="sap.ui.commons.layout" xmlns:common="sap.ui.commons" controllerName="convista.com.demo.dynamictile.twobyone.controller.Configuration">
 	<MessageStrip id="messageStrip" showIcon="true" showCloseButton="false" visible="false"/>
 	<form:SimpleForm id="configuration" maxContainerCols="8" minWidth="1024" editable="true">
 		<form:content>
