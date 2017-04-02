@@ -16,8 +16,11 @@ sap.ui.define([
                 oActionSelector = oView.byId("navigation_semantic_actionInput"),
                 oResourceModel = sap.ushell.components.tiles.utils.getResourceBundleModel();
 
+			var sRootPath = jQuery.sap.getModulePath("convista.com.demo.dynamictile.twobyone");
+			var sLocale = sap.ui.getCore().getConfiguration().getLanguage();
+			oResourceModel.enhance({bundleUrl:sRootPath+"/view/i18n/i18n.properties", bundleLocale:sLocale});
             oView.setModel(oResourceModel, "i18n");
-            var oBundle = oResourceModel.getResourceBundle();
+            //var oBundle = oResourceModel.getResourceBundle();
             // set view name for identification in utils
             oView.setViewName("convista.com.demo.dynamictile.twobyone.view.Configuration");
             sap.ushell.components.tiles.utils.createSemanticObjectModel(this, oSemanticObjectSelector, this.aDefaultObjects);

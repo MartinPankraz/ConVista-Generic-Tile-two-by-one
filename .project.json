@@ -6,8 +6,8 @@
   "build": {
     "targetFolder": "dist",
     "sourceFolder": "webapp",
-    "buildRequired": true,
-    "lastBuildDateTime": "Sun, 02 Apr 2017 09:37:06 GMT"
+    "buildRequired": false,
+    "lastBuildDateTime": "Sun, 02 Apr 2017 15:18:12 GMT"
   },
   "generation": [
     {
