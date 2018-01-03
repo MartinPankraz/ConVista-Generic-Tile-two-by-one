@@ -420,99 +420,134 @@ sap.ui.define([
             if (oTileApi.visible.isVisible()) {
                 this.bIsDataRequested = true;
                 
-                jQuery.ajax({
-					url: sUrl,
-					dataType: "jsonp",
-					// The name of the callback parameter, as specified by the YQL service
-    				jsonp: "callback",
-    				cache: false,
-    				success: function(json){
-    					var model = that.tileContainer.getModel();
-        				model.setData(json);
-        				oConfig = that.getView().getModel().getProperty("/config");
-        				var jsonFromString = null;
-						
-						var titleText = model.getProperty(oConfig.display_title_text);
-						if(titleText){
-							that.tileContainer.setHeader(titleText);	
-						}
-						jsonFromString = that.getJSONFromString(oConfig.display_subtitle_text);
-						var subTitleText = "";
-						if(jsonFromString.path){
-							subTitleText = model.getProperty(jsonFromString.path);
-							if(jsonFromString.formatter === ".formatDateTime"){
-								subTitleText = that.formatDateTime(subTitleText);	
-							}
-						}else{
-							subTitleText = model.getProperty(oConfig.display_subtitle_text);
-						}
-						if(subTitleText){
-							that.tileContainer.setSubheader(subTitleText);	
-						}
-						jsonFromString = that.getJSONFromString(oConfig.display_footer);
-						var footerText = "";
-						if(jsonFromString.path){
-							footerText = model.getProperty(jsonFromString.path);
-							if(jsonFromString.formatter === ".formatDateTime"){
-								footerText = that.formatDateTime(footerText);	
-							}
-						}else{
-							footerText = model.getProperty(oConfig.display_footer);
-						}
-						if(footerText){
-							var currentContent = that.tileContainer.getTileContent()[0];
-							currentContent.setFooter(footerText);
-						}
-						//make sure texts are assigned to second column objects in case second URL API is not used (hence share first one!)
-						if(oConfig.service_url_2 === ""){
-							jsonFromString = that.getJSONFromString(oConfig.display_second_footer);
-							var secondfooterText = "";
-							if(jsonFromString.path){
-								secondfooterText = model.getProperty(jsonFromString.path);
-								if(jsonFromString.formatter === ".formatDateTime"){
-									secondfooterText = that.formatDateTime(secondfooterText);	
-								}
-							}else{
-								secondfooterText = model.getProperty(oConfig.display_second_footer);
-							}
-							if(secondfooterText){
-								var myContent = that.tileContainer.getTileContent()[1];
-								myContent.setFooter(secondfooterText);
-							}	
-						}
-    				}
-				});
-				
-				if(sUrl2 !== ""){
-					jQuery.ajax({
-						url: sUrl2,
+                var regex = new RegExp('^https?:\/\/', 'i');
+                var urlIsAbsolute = regex.test(sUrl);
+                if(urlIsAbsolute){
+	                jQuery.ajax({
+						url: sUrl,
 						dataType: "jsonp",
 						// The name of the callback parameter, as specified by the YQL service
 	    				jsonp: "callback",
 	    				cache: false,
 	    				success: function(json){
-	    					var model = new sap.ui.model.json.JSONModel();
-	        				model.setData(json);
-	        				var myContent = that.tileContainer.getTileContent()[1];
-	        				myContent.setModel(model, "secondAPI");
-	        				var myConfig = that.getView().getModel().getProperty("/config");
-	        				var jsonFromString = that.getJSONFromString(myConfig.display_second_footer);
-							var secondfooterText = "";
-							if(jsonFromString.path){
-								secondfooterText = model.getProperty(jsonFromString.path);
-								if(jsonFromString.formatter === ".formatDateTime"){
-									secondfooterText = that.formatDateTime(secondfooterText);	
-								}
-							}else{
-								secondfooterText = model.getProperty(myConfig.display_second_footer);
-							}
-							if(secondfooterText){
-								myContent.setFooter(secondfooterText);
-							}	
-						}
+	    					that.handleServiceCallback(json, that, oConfig);
+	    				}
 					});
+					
+					if(sUrl2 !== ""){
+						jQuery.ajax({
+							url: sUrl2,
+							dataType: "jsonp",
+							// The name of the callback parameter, as specified by the YQL service
+		    				jsonp: "callback",
+		    				cache: false,
+		    				success: function(json){
+		    					that.handleSecondServiceCallback(json, that);
+							}
+						});
+					}
+                }
+				else{
+					jQuery.ajax({
+						type: "GET",
+						url: sUrl,
+						dataType: "json",
+	    				cache: false,
+	    				success: function(json){
+	    					that.handleServiceCallback(json, that, oConfig);
+	    				}
+					});
+					
+					if(sUrl2 !== ""){
+						jQuery.ajax({
+							type: "GET",
+							url: sUrl2,
+							dataType: "json",
+		    				cache: false,
+		    				success: function(json){
+		    					that.handleSecondServiceCallback(json, that);
+							}
+						});
+					}
 				}
             }
+        },
+        
+        handleServiceCallback: function(json, that, oConfig){
+    		var model = that.tileContainer.getModel();
+			model.setData(json);
+			oConfig = that.getView().getModel().getProperty("/config");
+			var jsonFromString = null;
+			
+			var titleText = model.getProperty(oConfig.display_title_text);
+			if(titleText){
+				that.tileContainer.setHeader(titleText);	
+			}
+			jsonFromString = that.getJSONFromString(oConfig.display_subtitle_text);
+			var subTitleText = "";
+			if(jsonFromString.path){
+				subTitleText = model.getProperty(jsonFromString.path);
+				if(jsonFromString.formatter === ".formatDateTime"){
+					subTitleText = that.formatDateTime(subTitleText);	
+				}
+			}else{
+				subTitleText = model.getProperty(oConfig.display_subtitle_text);
+			}
+			if(subTitleText){
+				that.tileContainer.setSubheader(subTitleText);	
+			}
+			jsonFromString = that.getJSONFromString(oConfig.display_footer);
+			var footerText = "";
+			if(jsonFromString.path){
+				footerText = model.getProperty(jsonFromString.path);
+				if(jsonFromString.formatter === ".formatDateTime"){
+					footerText = that.formatDateTime(footerText);	
+				}
+			}else{
+				footerText = model.getProperty(oConfig.display_footer);
+			}
+			if(footerText){
+				var currentContent = that.tileContainer.getTileContent()[0];
+				currentContent.setFooter(footerText);
+			}
+			//make sure texts are assigned to second column objects in case second URL API is not used (hence share first one!)
+			if(oConfig.service_url_2 === ""){
+				jsonFromString = that.getJSONFromString(oConfig.display_second_footer);
+				var secondfooterText = "";
+				if(jsonFromString.path){
+					secondfooterText = model.getProperty(jsonFromString.path);
+					if(jsonFromString.formatter === ".formatDateTime"){
+						secondfooterText = that.formatDateTime(secondfooterText);	
+					}
+				}else{
+					secondfooterText = model.getProperty(oConfig.display_second_footer);
+				}
+				if(secondfooterText){
+					var myContent = that.tileContainer.getTileContent()[1];
+					myContent.setFooter(secondfooterText);
+				}	
+			}
+        },
+        
+        handleSecondServiceCallback: function(json, that){
+        	var model = new sap.ui.model.json.JSONModel();
+			model.setData(json);
+			var myContent = that.tileContainer.getTileContent()[1];
+			myContent.setModel(model, "secondAPI");
+			var myConfig = that.getView().getModel().getProperty("/config");
+			var jsonFromString = that.getJSONFromString(myConfig.display_second_footer);
+			var secondfooterText = "";
+			if(jsonFromString.path){
+				secondfooterText = model.getProperty(jsonFromString.path);
+				if(jsonFromString.formatter === ".formatDateTime"){
+					secondfooterText = that.formatDateTime(secondfooterText);	
+				}
+			}else{
+				secondfooterText = model.getProperty(myConfig.display_second_footer);
+			}
+			if(secondfooterText){
+				myContent.setFooter(secondfooterText);
+			}
         },
         
         // loads data once if not in configuration mode
